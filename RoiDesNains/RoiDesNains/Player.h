@@ -11,7 +11,7 @@ public:
 	virtual void OnUpdate();
 
 private:
-
+	
 };
 
 Player::Player()
