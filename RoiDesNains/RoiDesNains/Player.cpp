@@ -1,8 +1,8 @@
 #include "Framework.h"
 
 Player::Player(){
-	sf::Texture PlayerTexture;
 	PlayerTexture.loadFromFile("../Images/DwarfSprite.png");
+	PlayerSprite.setTexture(PlayerTexture);
 }
 
 Player::~Player()
@@ -21,6 +21,6 @@ void Player::OnExit(int newState)
 {
 }
 
-void Player::OnUpdate() {
-	std::cout << "Yoenn la catin";
+void Player::OnUpdate()
+{
 }

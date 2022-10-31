@@ -5,8 +5,12 @@ class Game
 public:
 	Game();
 	~Game();
+	virtual void Init();
 
-private:
+	Player* getPlayer() { return m_player; };
+		
+protected:
+	Player* m_player;
 
 };
 

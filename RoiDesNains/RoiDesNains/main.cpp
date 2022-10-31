@@ -7,6 +7,8 @@ int main()
     bg.loadFromFile("../Images/bgtest.png");
     sf::Sprite bgtest(bg);
     bgtest.setScale(5.4, 3.7);
+    Game* m_Game = new Game;
+    m_Game->Init();
     while (window.isOpen())
     {
         sf::Event event;
@@ -18,6 +20,7 @@ int main()
 
         window.clear();
         window.draw(bgtest);
+        window.draw(m_Game->getPlayer()->getSprite());
         window.display();
     }
     return 0;
