@@ -1,4 +1,14 @@
 #include "Framework.h"
+
+
+Player::Player()
+{
+}
+
+Player::~Player()
+{
+}
+
 void Player::OnEnter(int oldState)
 {
 }
