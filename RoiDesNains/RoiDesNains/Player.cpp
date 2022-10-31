@@ -22,5 +22,5 @@ void Player::OnExit(int newState)
 }
 
 void Player::OnUpdate() {
-
+	std::cout << "Yoenn la catin";
 }
