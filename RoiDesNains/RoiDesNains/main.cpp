@@ -4,7 +4,7 @@ int main()
 {
     sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
     sf::Texture bg;
-    bg.loadFromFile("../Images/bgtest.png");
+    bg.loadFromFile("../x64/Debug/Images/bgtest.png");
     sf::Sprite bgtest(bg);
     bgtest.setScale(5.4, 3.7);
     while (window.isOpen())

@@ -25,7 +25,7 @@ void Menu::OnUpdate()
 {
     sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
     sf::Texture bg;
-    bg.loadFromFile("../Images/bgtest.png");
+    bg.loadFromFile("../Images/bgmenu.png");
     sf::Sprite bgtest(bg);
     bgtest.setScale(5.4, 3.7);
     while (window.isOpen())
@@ -41,5 +41,4 @@ void Menu::OnUpdate()
         window.draw(bgtest);
         window.display();
     }
-    return 0;
 }

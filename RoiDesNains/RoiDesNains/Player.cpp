@@ -1,8 +1,14 @@
 #include "Framework.h"
+
 Player::Player(){
 	sf::Texture PlayerTexture;
-	PlayerTexture.loadFromFile("../Images/DwarfSprite.png")
+	PlayerTexture.loadFromFile("../Images/DwarfSprite.png");
 }
+
+Player::~Player()
+{
+}
+
 void Player::OnEnter(int oldState)
 {
 }
