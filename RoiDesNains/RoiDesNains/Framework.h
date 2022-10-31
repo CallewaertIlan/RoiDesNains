@@ -3,6 +3,7 @@
 #define WINSIZE_X												1600
 #define WINSIZE_Y												900
 
+#include <iostream>
 #include <SFML/Graphics.hpp>
 #include "Controls.h"
 #include "Player.h"

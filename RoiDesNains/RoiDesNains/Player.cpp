@@ -1,7 +1,7 @@
 #include "Framework.h"
 
 Player::Player(){
-	PlayerTexture.loadFromFile("../Images/DwarfSprite.png");
+	PlayerTexture.loadFromFile("../Images/minersprite.png");
 	PlayerSprite.setTexture(PlayerTexture);
 }
 
