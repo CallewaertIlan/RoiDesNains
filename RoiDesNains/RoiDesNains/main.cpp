@@ -1,9 +1,9 @@
 #include <SFML/Graphics.hpp>
+#include "Framework.h"
 
 int main()
 {
-    sf::RenderWindow window(sf::VideoMode(1600, 900), "RoiDesNains");
-
+    sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
