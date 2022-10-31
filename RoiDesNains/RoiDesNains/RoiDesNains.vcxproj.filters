@@ -44,7 +44,6 @@
     <ClInclude Include="Controls.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-<<<<<<< HEAD
     <ClInclude Include="resource.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
@@ -58,10 +57,8 @@
     <Image Include="..\Images\bgtest.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
-=======
     <ClInclude Include="Menu.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
->>>>>>> c7a065de24f81f4077f5d2bc71c054e2488d3116
   </ItemGroup>
 </Project>
