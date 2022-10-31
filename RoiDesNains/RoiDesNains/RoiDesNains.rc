@@ -50,7 +50,7 @@ END
 // PNG
 //
 
-IDB_PNG1                PNG                     "C:\\Users\\ylemoine\\source\\repos\\CallewaertIlan\\RoiDesNains\\RoiDesNains\\Images\\bgtest.png"
+IDB_PNG1                PNG                     "..\\Images\\bgtest.png"
 
 #endif    // Français (France) resources
 /////////////////////////////////////////////////////////////////////////////
