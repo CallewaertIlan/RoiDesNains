@@ -47,7 +47,8 @@ void Controls::OnUpdate()
 	m_left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q);
 	m_start = GetKey(m_start, sf::Keyboard::isKeyPressed(sf::Keyboard::Space));
 	m_back = GetKey(m_back, sf::Keyboard::isKeyPressed(sf::Keyboard::Escape));
+
 	m_menu_up = GetKey(m_menu_up, sf::Keyboard::isKeyPressed(sf::Keyboard::Up));
 	m_menu_down = GetKey(m_menu_down, sf::Keyboard::isKeyPressed(sf::Keyboard::Down));
-
+	 
 }

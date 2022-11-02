@@ -11,11 +11,10 @@ public:
 	virtual void OnExit(int newState);
 
 	void addValue(int add);
-
-	Controls GetControler() { return m_controler; };
+	
+	void newGame();
+	void keysInfo();
 
 private:
-	Controls m_controler;
-
 	int valueMenu;
 };
