@@ -23,4 +23,5 @@ void Player::OnExit(int newState)
 
 void Player::OnUpdate()
 {
+	getSprite().move(1, 0);
 }

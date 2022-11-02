@@ -16,6 +16,7 @@ void Menu::OnEnter(int oldState)
 
 void Menu::OnExecute()
 {
+    //std::chrono::steady_clock::time_point
 }
 
 void Menu::OnExit(int newState)
@@ -134,9 +135,9 @@ void Menu::newGame()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
         window.clear();
         window.draw(bgtest);
+        m_Game->getPlayer()->OnUpdate();
         window.draw(m_Game->getPlayer()->getSprite());
         window.display();
     }
