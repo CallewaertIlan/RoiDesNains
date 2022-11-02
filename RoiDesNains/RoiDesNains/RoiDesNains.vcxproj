@@ -138,6 +138,7 @@
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Map.cpp" />
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Player.cpp" />
   </ItemGroup>
@@ -146,12 +147,9 @@
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Framework.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="Map.h" />
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Player.h" />
-    <ClInclude Include="resource.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="RoiDesNains.rc" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Images\bgtest.png" />

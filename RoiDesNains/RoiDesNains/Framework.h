@@ -5,8 +5,10 @@
 
 #include <SFML/Graphics.hpp>
 #include <Windows.h>
+#include <chrono>
 #include <stdlib.h>
 #include <iostream>
+#include "Map.h"
 #include "Controls.h"
 #include "Player.h"
 #include "Menu.h"
