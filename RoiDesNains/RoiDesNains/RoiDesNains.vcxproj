@@ -152,7 +152,14 @@
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\Images\bggame.png" />
     <Image Include="..\Images\bgtest.png" />
+    <Image Include="..\Images\minersprite.png" />
+    <Image Include="..\Images\pic.png" />
+    <Image Include="..\Images\rock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Level\Test1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

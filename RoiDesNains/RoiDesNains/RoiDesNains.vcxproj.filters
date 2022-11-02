@@ -64,5 +64,22 @@
     <ClInclude Include="Menu.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
+    <Image Include="..\Images\rock.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\minersprite.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\pic.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\bggame.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\Level\Test1.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
   </ItemGroup>
 </Project>

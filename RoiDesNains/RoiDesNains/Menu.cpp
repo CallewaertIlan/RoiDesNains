@@ -132,7 +132,3 @@ void Menu::keysInfo()
 {
     printf("Yoenn ne travaille pas beaucoup SHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESH");
 }
-
-void LoadRessources()
-{
-}
