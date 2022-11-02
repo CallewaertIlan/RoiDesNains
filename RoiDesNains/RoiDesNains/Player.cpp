@@ -34,3 +34,30 @@ void Player::OnUpdate()
 	}
 	PlayerSprite.move(sf::Vector2f(0.0f, 2.0f));
 }
+
+bool Player::Collision(sf::RectangleShape entity, string move_type)
+{
+	entity.getPosition();
+	PlayerSprite.getPosition();
+	if (move_type == "right") {
+		if (entity.getPosition().x + SIZE_X_SPRITE_PLAYER > entity.getPosition().x && entity.getPosition().x + SIZE_X_SPRITE_PLAYER < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
+			if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {
+				return false;
+			}
+		}
+	}
+	if (move_type == "left") {
+		if (entity.getPosition().x > entity.getPosition().x && entity.getPosition().x < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
+			if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {
+				return false;
+			}
+		}
+	}
+	//if (move_type == "up") {
+	//	if (entity.getPosition().x > entity.getPosition().x && entity.getPosition().x < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
+	//		if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {
+	//			return false;
+	//		}
+	//	}
+	//}
+}

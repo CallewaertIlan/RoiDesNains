@@ -3,6 +3,7 @@
 Game::Game()
 {
 	m_player = NULL;
+    m_listEntities;
 }
 
 Game::~Game()
@@ -19,8 +20,8 @@ void Game::Loop()
 {
     sf::Texture bg;
     bg.loadFromFile("../Images/bg_game.png");
-    sf::Sprite bgtest(bg);
-    bgtest.setScale(5.4f, 3.7f);
+    sf::Sprite bgGame(bg);
+    bgGame.setScale(5.4f, 3.7f);
     while (m_window.isOpen())
     {
         sf::Event event;
@@ -30,17 +31,27 @@ void Game::Loop()
                 m_window.close();
         }
 
+        // Effacer tout sur la fenetre
         m_window.clear();
-        m_window.draw(bgtest);
+
+        // Dessiner le fond
+        m_window.draw(bgGame);
+
+        // Charger la map
         LoadRessources();
+
+        // Player
         m_player->OnUpdate();
         m_window.draw(m_player->getSprite());
+        
+        // Afficher les mises à jour de la fenetre
         m_window.display();
     }
 }
 
 void Game::LoadRessources()
 {
+    m_listEntities.clear();
     ifstream inFile;
     inFile.open("../Level/Test1.txt", ios::in);
     if (!inFile) {
@@ -60,12 +71,14 @@ void Game::LoadRessources()
                 sf::RectangleShape rectangle(sf::Vector2f(32.0f, 18.0f));
                 rectangle.setTexture(&rock);
                 rectangle.setPosition(i * 32.0f, count * 18.0f);
+                m_listEntities.push_back(rectangle);
                 m_window.draw(rectangle);
             }
             else if (tp[i] == '2') {
                 sf::RectangleShape triangle(sf::Vector2f(32.0f, 18.0f));
                 triangle.setTexture(&pic);
                 triangle.setPosition(i * 32.0f, count * 18.0f);
+                m_listEntities.push_back(triangle);
                 m_window.draw(triangle);
             }
         }

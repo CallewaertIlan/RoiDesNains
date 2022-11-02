@@ -10,6 +10,8 @@ public:
 	virtual void OnExit(int newState);
 	virtual void OnUpdate();
 
+	bool Collision(sf::RectangleShape entity, string move_type);
+
 	sf::Texture getTexture() { return PlayerTexture; };
 	sf::Sprite getSprite() { return PlayerSprite; };
 
