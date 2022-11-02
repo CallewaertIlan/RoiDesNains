@@ -18,7 +18,7 @@ void Game::Init() {
 void Game::Loop()
 {
     sf::Texture bg;
-    bg.loadFromFile("../Images/bggame.png");
+    bg.loadFromFile("../Images/bg_game.png");
     sf::Sprite bgtest(bg);
     bgtest.setScale(5.4, 3.7);
     while (m_window.isOpen())
