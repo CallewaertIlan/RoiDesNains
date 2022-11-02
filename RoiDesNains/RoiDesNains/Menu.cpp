@@ -1,9 +1,11 @@
 #include "Framework.h"
+using namespace std;
 
 
 Menu::Menu()
 {
     valueMenu = 1;
+    keyPress = chrono::steady_clock::now();
 }
 
 Menu::~Menu()
@@ -47,13 +49,15 @@ void Menu::OnUpdate()
 
     while (window.isOpen())
     {
-        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) {
+        newKeyPress = chrono::steady_clock::now();
+        auto elapsed_time = chrono::duration_cast<chrono::milliseconds>(newKeyPress- keyPress).count();
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) &&  elapsed_time > 300) {
             addValue(-1);
-            Sleep(250);
+            keyPress = newKeyPress;
         }
-        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) {
+        else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Down) && elapsed_time > 300) {
             addValue(1);
-            Sleep(250);
+            keyPress = newKeyPress;
         }
         else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter)) {
             switch (valueMenu)
@@ -119,30 +123,15 @@ void Menu::addValue(int add)
 
 void Menu::newGame()
 {
-    sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
-    sf::Texture bg;
-    bg.loadFromFile("../Images/bgtest.png");
-    sf::Sprite bgtest(bg);
-    bgtest.setScale(5.4, 3.7);
     Game* m_Game = new Game;
     m_Game->Init();
-    while (window.isOpen())
-    {
-        sf::Event event;
-        while (window.pollEvent(event))
-        {
-            if (event.type == sf::Event::Closed)
-                window.close();
-        }
-
-        window.clear();
-        window.draw(bgtest);
-        window.draw(m_Game->getPlayer()->getSprite());
-        window.display();
-    }
 }
 
 void Menu::keysInfo()
 {
-    printf("SHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESH");
+    printf("Yoenn ne travaille pas beaucoup SHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESH");
+}
+
+void LoadRessources()
+{
 }

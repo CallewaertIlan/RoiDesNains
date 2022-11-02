@@ -7,6 +7,8 @@ public:
 	~Game();
 	virtual void Init();
 
+	void Loop();
+
 	Player* getPlayer() { return m_player; };
 		
 protected:
