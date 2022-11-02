@@ -12,7 +12,6 @@
 #include <iomanip>
 #include <fstream>
 #include "Map.h"
-#include "Controls.h"
 #include "Player.h"
 #include "Menu.h"
 #include "Game.h"

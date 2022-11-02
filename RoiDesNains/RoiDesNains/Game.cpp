@@ -20,7 +20,7 @@ void Game::Loop()
     sf::Texture bg;
     bg.loadFromFile("../Images/bg_game.png");
     sf::Sprite bgtest(bg);
-    bgtest.setScale(5.4, 3.7);
+    bgtest.setScale(5.4f, 3.7f);
     while (m_window.isOpen())
     {
         sf::Event event;
@@ -59,13 +59,13 @@ void Game::LoadRessources()
             if (tp[i] == '1') {
                 sf::RectangleShape rectangle(sf::Vector2f(32.0f, 18.0f));
                 rectangle.setTexture(&rock);
-                rectangle.setPosition(i * 32, count * 18);
+                rectangle.setPosition(i * 32.0f, count * 18.0f);
                 m_window.draw(rectangle);
             }
             else if (tp[i] == '2') {
                 sf::RectangleShape triangle(sf::Vector2f(32.0f, 18.0f));
                 triangle.setTexture(&pic);
-                triangle.setPosition(i * 32, count * 18);
+                triangle.setPosition(i * 32.0f, count * 18.0f);
                 m_window.draw(triangle);
             }
         }

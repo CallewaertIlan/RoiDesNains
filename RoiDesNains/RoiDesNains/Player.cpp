@@ -25,12 +25,12 @@ void Player::OnExit(int newState)
 void Player::OnUpdate()
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		PlayerSprite.move(sf::Vector2f(1.2, 0));
+		PlayerSprite.move(sf::Vector2f(1.2f, 0.0f));
 		//Sleep(50);
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-		PlayerSprite.move(sf::Vector2f(-1.2, 0));
+		PlayerSprite.move(sf::Vector2f(-1.20f, 0.0f));
 		//Sleep(50);
 	}
-	PlayerSprite.move(sf::Vector2f(0, 2));
+	PlayerSprite.move(sf::Vector2f(0.0f, 2.0f));
 }

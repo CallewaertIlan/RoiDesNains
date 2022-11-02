@@ -31,7 +31,7 @@ void Menu::OnUpdate()
     sf::Texture bg;
     bg.loadFromFile("../Images/bgtest.png");
     sf::Sprite bgtest(bg);
-    bgtest.setScale(5.4, 3.7);
+    bgtest.setScale(5.4f, 3.7f);
 
     sf::Font font;
     font.loadFromFile("../Font/arial.ttf");
@@ -92,7 +92,7 @@ void Menu::OnUpdate()
         for (int i = 0; i < 4; i++)
         {
             text.setString(listText[i]);
-            text.setPosition(sf::Vector2f(200, 200 + 100 * i));
+            text.setPosition(sf::Vector2f(200.0f, 200.0f + 100.0f * i));
             
             if (valueMenu == i) {
                 text.setFillColor(sf::Color::Red);
