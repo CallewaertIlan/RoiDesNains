@@ -3,6 +3,8 @@
 Player::Player(){
 	PlayerTexture.loadFromFile("../Images/minersprite.png");
 	PlayerSprite.setTexture(PlayerTexture);
+	PlayerSprite.setScale(1.95, 1.95);
+	PlayerSprite.setPosition(90, 60);
 	
 }
 
@@ -32,7 +34,7 @@ void Player::OnUpdate()
 		PlayerSprite.move(sf::Vector2f(-1.20f, 0.0f));
 		//Sleep(50);
 	}
-	PlayerSprite.move(sf::Vector2f(0.0f, 2.0f));
+	//PlayerSprite.move(sf::Vector2f(0.0f, 2.0f));
 }
 
 bool Player::Collision(sf::RectangleShape entity, string move_type)
