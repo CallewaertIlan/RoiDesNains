@@ -3,8 +3,8 @@
 Player::Player(){
 	PlayerTexture.loadFromFile("../Images/minersprite.png");
 	PlayerSprite.setTexture(PlayerTexture);
-	PlayerSprite.setScale(1.95, 1.95);
-	PlayerSprite.setPosition(90, 60);
+	setScale(1.95, 1.95);
+	setPosition(90, 60);
 	
 }
 
@@ -24,37 +24,57 @@ void Player::OnExit(int newState)
 {
 }
 
-void Player::OnUpdate()
+void Player::OnUpdate(vector<sf::RectangleShape> listEntities)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-		PlayerSprite.move(sf::Vector2f(1.2f, 0.0f));
-		//Sleep(50);
+		bool collide = false;
+		for (int i = 0; i < listEntities.size(); i++)
+		{
+			collide = Collision(listEntities[i], "right");
+		}
+		if (!collide) {
+			PlayerSprite.move(sf::Vector2f(1.2f, 0.0f));
+		};
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-		PlayerSprite.move(sf::Vector2f(-1.20f, 0.0f));
-		//Sleep(50);
+		bool collide = false;
+		for (int i = 0; i < listEntities.size(); i++)
+		{
+			collide = Collision(listEntities[i], "left");
+		}
+		if (!collide) {
+			PlayerSprite.move(sf::Vector2f(-1.2f, 0.0f));
+		};
 	}
 	//PlayerSprite.move(sf::Vector2f(0.0f, 2.0f));
 }
 
 bool Player::Collision(sf::RectangleShape entity, string move_type)
 {
-	entity.getPosition();
-	PlayerSprite.getPosition();
+	cout << "Entity x" << entity.getPosition().x << endl;
+	cout << "Player x" << PlayerSprite.getPosition().x << endl;
+	
+	cout << endl;
+	cout << "Entity y" << entity.getPosition().y << endl;
+	cout << "Player y" << PlayerSprite.getPosition().y << endl;
+	cout << endl;
+	cout << endl;
+
 	if (move_type == "right") {
 		if (entity.getPosition().x + SIZE_X_SPRITE_PLAYER > entity.getPosition().x && entity.getPosition().x + SIZE_X_SPRITE_PLAYER < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
 			if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {
-				return false;
+				return true;
 			}
 		}
 	}
 	if (move_type == "left") {
 		if (entity.getPosition().x > entity.getPosition().x && entity.getPosition().x < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
 			if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {
-				return false;
+				return true;
 			}
 		}
 	}
+	return false;
 	//if (move_type == "up") {
 	//	if (entity.getPosition().x > entity.getPosition().x && entity.getPosition().x < entity.getPosition().x + SIZE_X_SPRITE_CUBE) {
 	//		if (entity.getPosition().y > entity.getPosition().y && entity.getPosition().y < entity.getPosition().y + SIZE_Y_SPRITE_CUBE) {

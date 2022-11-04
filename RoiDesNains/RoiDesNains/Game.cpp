@@ -41,7 +41,7 @@ void Game::Loop()
         LoadRessources();
 
         // Player
-        m_player->OnUpdate();
+        m_player->OnUpdate(m_listEntities);
         m_window.draw(m_player->getSprite());
         
         // Afficher les mises à jour de la fenetre
