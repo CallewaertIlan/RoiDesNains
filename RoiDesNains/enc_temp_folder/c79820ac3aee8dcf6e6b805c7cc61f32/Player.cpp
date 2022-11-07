@@ -49,9 +49,10 @@ void Player::OnUpdate(vector<sf::RectangleShape> listEntities)
 
 bool Player::Collision(sf::RectangleShape entity, string move_type)
 {
-	if (move_type == "down")
-		return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
+	//if (move_type == "down")
+	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
 	//else if (move_type == "right")
 	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
+	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
 
 }
