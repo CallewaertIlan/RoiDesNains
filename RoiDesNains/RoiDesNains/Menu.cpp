@@ -130,5 +130,5 @@ void Menu::newGame()
 
 void Menu::keysInfo()
 {
-    printf("Yoenn ne travaille pas beaucoup SHEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEESH");
+    printf("vitouviiiii");
 }

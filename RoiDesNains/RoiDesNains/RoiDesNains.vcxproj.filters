@@ -76,6 +76,9 @@
     <Image Include="..\Images\bggame.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
+    <Image Include="..\Images\door.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <Text Include="..\Level\Test1.txt">

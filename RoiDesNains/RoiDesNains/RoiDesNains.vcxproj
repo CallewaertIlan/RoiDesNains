@@ -154,6 +154,7 @@
   <ItemGroup>
     <Image Include="..\Images\bggame.png" />
     <Image Include="..\Images\bgtest.png" />
+    <Image Include="..\Images\door.png" />
     <Image Include="..\Images\minersprite.png" />
     <Image Include="..\Images\pic.png" />
     <Image Include="..\Images\rock.png" />

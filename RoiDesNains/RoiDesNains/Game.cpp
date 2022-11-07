@@ -67,6 +67,8 @@ void Game::LoadRessources()
     rock.loadFromFile("../Images/rock.png");
     sf::Texture pic;
     pic.loadFromFile("../Images/pic.png");
+    sf::Texture door;
+    door.loadFromFile("../Images/door.png");
     while (getline(inFile, tp)) {
         for (int i = 0; i < tp.size(); i++)
         {
@@ -83,6 +85,12 @@ void Game::LoadRessources()
                 triangle.setPosition(i * 32.0f, count * 18.0f);
                 m_listEntities.push_back(triangle);
                 m_window.draw(triangle);
+            }else if (tp[i] == '3') {
+                sf::RectangleShape rectangle(sf::Vector2f(32.0f, 54.0f));
+                rectangle.setTexture(&door);
+                rectangle.setPosition(i * 32.0f, (count - 2) * 18.0f);
+                m_listEntities.push_back(rectangle);
+                m_window.draw(rectangle);
             }
         }
         count++;
