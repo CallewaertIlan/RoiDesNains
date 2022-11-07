@@ -2,8 +2,8 @@
 
 #define WINSIZE_X												1600
 #define WINSIZE_Y												900
-#define SIZE_X_SPRITE_PLAYER									49.0f
-#define SIZE_Y_SPRITE_PLAYER									48.0f
+#define SIZE_X_SPRITE_PLAYER									53.0f
+#define SIZE_Y_SPRITE_PLAYER									53.0f
 #define SIZE_X_SPRITE_CUBE										32.0f
 #define SIZE_Y_SPRITE_CUBE										18.0f
 

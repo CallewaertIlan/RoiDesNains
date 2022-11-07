@@ -44,6 +44,7 @@ void Game::Loop()
         LoadRessources();
 
         // Player
+        m_window.setView(m_player->getView());
         m_player->OnUpdate(m_listEntities, 0, deltaTime);
         m_window.draw(m_player->getSprite());
         

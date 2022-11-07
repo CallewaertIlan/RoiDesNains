@@ -12,10 +12,12 @@ public:
 
 	bool Collision(sf::RectangleShape entity, string move_type);
 
+	sf::View getView() { return m_view; };
 	sf::Texture getTexture() { return PlayerTexture; };
 	sf::Sprite getSprite() { return PlayerSprite; };
 
 private:
+	sf::View m_view;
 	sf::Texture PlayerTexture;
 	sf::Sprite PlayerSprite;
 	Animations m_anim;
