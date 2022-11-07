@@ -15,7 +15,7 @@ int main()
 	_CrtMemCheckpoint(&memStateEnd);
 	if (_CrtMemDifference(&memStateDiff, &memStateInit, &memStateEnd))
 	{
-		//MessageBoxA(NULL, "MEMORY LEAKS", "DISCLAIMER", 0);
+		MessageBoxA(NULL, "MEMORY LEAKS", "DISCLAIMER", 0);
 	}
 #endif 
     return 0;

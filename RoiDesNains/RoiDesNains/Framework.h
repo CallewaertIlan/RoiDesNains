@@ -17,6 +17,7 @@ using namespace std;
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include "Animations.h"
 #include "Map.h"
 #include "Player.h"
 #include "Menu.h"

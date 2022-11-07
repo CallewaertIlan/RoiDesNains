@@ -22,8 +22,11 @@ void Game::Loop()
     bg.loadFromFile("../Images/bg_game.png");
     sf::Sprite bgGame(bg);
     bgGame.setScale(5.4f, 3.7f);
+    float deltaTime = 0.0f;
+    sf::Clock clock;
     while (m_window.isOpen())
     {
+        deltaTime = clock.restart().asSeconds();
         sf::Event event;
         while (m_window.pollEvent(event))
         {
@@ -41,7 +44,7 @@ void Game::Loop()
         LoadRessources();
 
         // Player
-        m_player->OnUpdate(m_listEntities);
+        m_player->OnUpdate(m_listEntities, 0, deltaTime);
         m_window.draw(m_player->getSprite());
         
         // Afficher les mises à jour de la fenetre

@@ -8,7 +8,7 @@ public:
 	virtual void OnEnter(int oldState);
 	virtual void OnExecute();
 	virtual void OnExit(int newState);
-	virtual void OnUpdate(vector<sf::RectangleShape> listEntities);
+	virtual void OnUpdate(vector<sf::RectangleShape>& listEntities, int row, float deltaTime);
 
 	bool Collision(sf::RectangleShape entity, string move_type);
 
@@ -18,4 +18,5 @@ public:
 private:
 	sf::Texture PlayerTexture;
 	sf::Sprite PlayerSprite;
+	Animations m_anim;
 };

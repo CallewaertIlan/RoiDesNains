@@ -1,11 +1,13 @@
 #include "Framework.h"
 
 Player::Player(){
-	PlayerTexture.loadFromFile("../Images/minersprite.png");
+	PlayerTexture.loadFromFile("../Images/testSpriteSheet.png");
+	PlayerTexture.setSmooth(FALSE);
 	PlayerSprite.setTexture(PlayerTexture);
-	PlayerSprite.setScale(1.95, 1.95);
+	PlayerSprite.setScale(1.95f, 1.95f);
 	PlayerSprite.setPosition(90, 60);
 	
+	m_anim.initiaisation(&PlayerTexture, sf::Vector2u(5, 1), 0.3f);
 }
 
 Player::~Player()
@@ -24,12 +26,16 @@ void Player::OnExit(int newState)
 {
 }
 
-void Player::OnUpdate(vector<sf::RectangleShape> listEntities)
+void Player::OnUpdate(vector<sf::RectangleShape>& listEntities, int row, float deltaTime)
 {
+	m_anim.Update(row, deltaTime);
+	PlayerSprite.setTextureRect(m_anim.getUvRect());
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		PlayerSprite.setScale(1.95f, 1.95f);
 		PlayerSprite.move(sf::Vector2f(1.2f, 0.0f));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+		PlayerSprite.setScale(-1.95f, 1.95f);
 		PlayerSprite.move(sf::Vector2f(-1.2f, 0.0f));
 	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
@@ -44,7 +50,6 @@ void Player::OnUpdate(vector<sf::RectangleShape> listEntities)
 	if (!collide) {
 		PlayerSprite.move(sf::Vector2f(0.0f, 3.0f));
 	};
-	
 }
 
 bool Player::Collision(sf::RectangleShape entity, string move_type)
@@ -53,5 +58,4 @@ bool Player::Collision(sf::RectangleShape entity, string move_type)
 		return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
 	//else if (move_type == "right")
 	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
-
 }
