@@ -6,7 +6,7 @@ Player::Player(){
 	PlayerSprite.setTexture(PlayerTexture);
 	PlayerSprite.setScale(3.9f, 3.9f);
 	PlayerSprite.setPosition(180, 150);
-	m_view.setSize(1200, 775);
+	m_view.setSize(900.0f, 506.25f);
 
 	PlayerSprite.setOrigin(SIZE_X_SPRITE_PLAYER / 2.0f, SIZE_Y_SPRITE_PLAYER / 2.0f);
 	
