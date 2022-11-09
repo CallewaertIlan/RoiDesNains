@@ -1,10 +1,10 @@
 #include "Framework.h"
-#include <cmath>
 
 Game::Game()
 {
 	m_player = NULL;
     m_listEntities;
+    m_gameState = Game::GAME;
 }
 
 Game::~Game()
@@ -40,18 +40,33 @@ void Game::Loop()
                 m_window.close();
         }
 
-        OnUpdate(deltaTime);
+        switch (m_gameState)
+        {
+        case Game::GAME:
+            OnUpdate(deltaTime);
+            OnRender(bgGame);
+            break;
+        case Game::MENU:
+            sf::Texture bgTexture;
+            bgTexture.loadFromFile("../Images/bgPause.png");
+            sf::Sprite bgPause(bgTexture);
+            m_window.setView(m_window.getDefaultView());
+            m_window.draw(bgPause);
+            m_window.display();
 
-        OnRender(bgGame);
+            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+            {
+                m_gameState = Game::GAME;
+            }
+            break;
+        }
+
 
     }
 }
 
 void Game::LoadRessources()
 {
-    sf::Texture rockTexture;
-    sf::Texture doorTexture;
-    sf::Texture picTexture;
     rockTexture.loadFromFile("../Images/rock.png");
     doorTexture.loadFromFile("../Images/door.png");
     picTexture.loadFromFile("../Images/pic.png");
@@ -79,7 +94,7 @@ void Game::LoadRessources()
                 m_listEntities.push_back(pic);
             }else if (tp[i] == '3') {
                 Entity door;
-                door.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::DOOR, &doorTexture);
+                door.initialisation(32.0f, 54.0f, i * 32.0f, (count - 2) * 18.0f, Entity::DOOR, &doorTexture);
                 m_listEntities.push_back(door);
             }
         }
@@ -88,11 +103,15 @@ void Game::LoadRessources()
     inFile.close();
 }
 
-void Game::OnUpdate(float deltaTime) {
+void Game::OnUpdate(float deltaTime) { 
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+    {
+        m_gameState = Game::MENU;
+    }
     // Entity
     for (int i = 0; i < m_listEntities.size(); i++)
     {
-        m_listEntities[i].OnUpdate();
+        m_listEntities[i].OnUpdate(deltaTime);
     }
 
     // Player

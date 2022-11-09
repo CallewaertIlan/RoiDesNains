@@ -3,6 +3,11 @@
 class Game
 {
 public:
+	enum
+	{
+		GAME = 0,
+		MENU,
+	};
 	Game();
 	~Game();
 	virtual void Init();
@@ -17,6 +22,11 @@ public:
 	Player* getPlayer() { return m_player; };
 		
 protected:
+	sf::Texture rockTexture;
+	sf::Texture doorTexture;
+	sf::Texture picTexture;
+	bool isPaused;
+	int m_gameState;
 	vector<Entity> m_listEntities;
 	sf::RenderWindow m_window;
 	Player* m_player;

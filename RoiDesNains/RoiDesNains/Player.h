@@ -25,6 +25,12 @@ private:
 	float m_scaleWidth;
 	float m_scaleHeight;
 	unsigned int m_row;
+
 	bool m_canJump;
+	bool m_isJump;
+	
+	float m_timeNow;
+	float m_timeStartJump;
+
 	float m_speed;
 };
