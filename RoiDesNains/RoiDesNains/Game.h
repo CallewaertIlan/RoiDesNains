@@ -7,6 +7,7 @@ public:
 	{
 		GAME = 0,
 		MENU,
+		DEAD,
 	};
 	Game();
 	~Game();
@@ -17,6 +18,8 @@ public:
 
 	void OnUpdate(float deltaTime);
 	void OnRender(sf::Sprite bgGame);
+	void Menu();
+	void Death();
 
 
 	Player* getPlayer() { return m_player; };

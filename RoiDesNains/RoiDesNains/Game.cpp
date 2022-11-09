@@ -47,21 +47,12 @@ void Game::Loop()
             OnRender(bgGame);
             break;
         case Game::MENU:
-            sf::Texture bgTexture;
-            bgTexture.loadFromFile("../Images/bgPause.png");
-            sf::Sprite bgPause(bgTexture);
-            m_window.setView(m_window.getDefaultView());
-            m_window.draw(bgPause);
-            m_window.display();
-
-            if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
-            {
-                m_gameState = Game::GAME;
-            }
+            Menu();
+            break;
+        case Game::DEAD:
+            Death();
             break;
         }
-
-
     }
 }
 
@@ -137,4 +128,33 @@ void Game::OnRender(sf::Sprite bgGame) {
 
     // Afficher les mises à jour de la fenetre
     m_window.display();
+}
+
+void Game::Menu() {
+    sf::Texture bgTexture;
+    bgTexture.loadFromFile("../Images/bgPause.png");
+    sf::Sprite bgPause(bgTexture);
+    m_window.setView(m_window.getDefaultView());
+    m_window.draw(bgPause);
+    m_window.display();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    {
+        m_gameState = Game::GAME;
+        bgTexture.~Texture();
+    }
+}
+
+void Game::Death() {
+    sf::Texture bgTexture;
+    bgTexture.loadFromFile("../Images/bgDeath.png");
+    sf::Sprite bgPause(bgTexture);
+    m_window.setView(m_window.getDefaultView());
+    m_window.draw(bgPause);
+    m_window.display();
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
+    {
+        m_window.close();
+    }
 }
