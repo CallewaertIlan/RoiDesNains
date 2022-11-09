@@ -13,7 +13,7 @@ public:
 	Player* getPlayer() { return m_player; };
 		
 protected:
-	vector<sf::RectangleShape> m_listEntities;
+	vector<Entity*> m_listEntities;
 	sf::RenderWindow m_window;
 	Player* m_player;
 };

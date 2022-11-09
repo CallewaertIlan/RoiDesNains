@@ -18,6 +18,7 @@ using namespace std;
 #include <iomanip>
 #include <fstream>
 #include "Animations.h"
+#include "Entity.h"
 #include "Map.h"
 #include "Player.h"
 #include "Menu.h"

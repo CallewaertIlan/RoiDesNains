@@ -1,4 +1,5 @@
 #include "Framework.h"
+#include <cmath>
 
 Game::Game()
 {
@@ -43,6 +44,12 @@ void Game::Loop()
         // Charger la map
         LoadRessources();
 
+        // Entity
+        for (int i = 0; i < m_listEntities.size(); i++)
+        {
+            //m_listEntities[i].OnUpdate();
+        }
+
         // Player
         m_window.setView(m_player->getView());
         m_player->OnUpdate(m_listEntities, 0, deltaTime);
@@ -64,34 +71,28 @@ void Game::LoadRessources()
     }
     int count = 0;
     string tp;
-    sf::Texture rock;
-    rock.loadFromFile("../Images/rock.png");
-    sf::Texture pic;
-    pic.loadFromFile("../Images/pic.png");
-    sf::Texture door;
-    door.loadFromFile("../Images/door.png");
     while (getline(inFile, tp)) {
         for (int i = 0; i < tp.size(); i++)
         {
             if (tp[i] == '1') {
-                sf::RectangleShape rectangle(sf::Vector2f(32.0f, 18.0f));
-                rectangle.setTexture(&rock);
-                rectangle.setPosition(i * 32.0f, count * 18.0f);
-                m_listEntities.push_back(rectangle);
-                m_window.draw(rectangle);
+                Entity* rock = new Entity;
+                rock->initialisation(32.0f, 18.0f, Entity::ROCK);
+                rock->GetRect().setPosition(i * 32.0f, count * 18.0f);
+                m_listEntities.push_back(rock);
+                m_window.draw(rock->GetRect());
             }
             else if (tp[i] == '2') {
-                sf::RectangleShape triangle(sf::Vector2f(32.0f, 18.0f));
-                triangle.setTexture(&pic);
-                triangle.setPosition(i * 32.0f, count * 18.0f);
-                m_listEntities.push_back(triangle);
-                m_window.draw(triangle);
+                Entity* pic = new Entity;
+                pic->initialisation(32.0f, 18.0f, Entity::ROCK);
+                pic->GetRect().setPosition(i * 32.0f, count * 18.0f);
+                m_listEntities.push_back(pic);
+                m_window.draw(pic->GetRect());
             }else if (tp[i] == '3') {
-                sf::RectangleShape rectangle(sf::Vector2f(32.0f, 54.0f));
-                rectangle.setTexture(&door);
-                rectangle.setPosition(i * 32.0f, (count - 2) * 18.0f);
-                m_listEntities.push_back(rectangle);
-                m_window.draw(rectangle);
+                Entity* door = new Entity;
+                door->initialisation(32.0f, 18.0f, Entity::ROCK);
+                door->GetRect().setPosition(i * 32.0f, count * 18.0f);
+                m_listEntities.push_back(door);
+                m_window.draw(door->GetRect());
             }
         }
         count++;
