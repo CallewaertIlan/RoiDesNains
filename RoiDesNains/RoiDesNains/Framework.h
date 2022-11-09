@@ -17,6 +17,7 @@ using namespace std;
 #include <iostream>
 #include <iomanip>
 #include <fstream>
+#include <cmath>
 #include "Animations.h"
 #include "Entity.h"
 #include "Map.h"

@@ -24,6 +24,10 @@ void Entity::initialisation(float width, float height, float x, float y, int typ
 
 }
 
-void Entity::OnUpdate() {
+void Entity::OnUpdate(float deltaTime) {
+	if (m_type == Entity::PIC) {
+		//double test = cos(deltaTime);
+		m_rect.move(cos(timeGetTime()*10), 0);
+	}
 
 }

@@ -14,7 +14,7 @@ public:
 	~Entity();
 
 	void initialisation(float width, float height, float x, float y, int type, sf::Texture* texture);
-	void OnUpdate();
+	void OnUpdate(float deltaTime);
 	sf::RectangleShape GetRect() { return m_rect; };
 
 private:
