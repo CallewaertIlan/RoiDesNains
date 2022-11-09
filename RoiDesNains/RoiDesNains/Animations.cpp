@@ -2,6 +2,8 @@
 
 Animations::Animations()
 {
+	SwitchTime = 0.0f;
+	TotalTime = 0.0f;
 }
 
 void Animations::initiaisation(sf::Texture* texture, sf::Vector2u ImageSetCount, float SwitchSetTime)

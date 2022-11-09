@@ -13,17 +13,13 @@ public:
 	Entity();
 	~Entity();
 
-	void initialisation(float width, float height, int type);
+	void initialisation(float width, float height, float x, float y, int type, sf::Texture* texture);
 	void OnUpdate();
-	void setTexture();
-	sf::RectangleShape GetRect() { return m_rect };
+	sf::RectangleShape GetRect() { return m_rect; };
 
 private:
 	sf::RectangleShape m_rect;
 	int m_type;
-	int m_width;
-	int m_height;
-	sf::Texture m_texture;
 };
 
 

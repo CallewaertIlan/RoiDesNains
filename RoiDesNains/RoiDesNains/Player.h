@@ -8,9 +8,9 @@ public:
 	virtual void OnEnter(int oldState);
 	virtual void OnExecute();
 	virtual void OnExit(int newState);
-	virtual void OnUpdate(vector<sf::RectangleShape>& listEntities, int row, float deltaTime);
+	virtual void OnUpdate(vector<Entity>& listEntities, int row, float deltaTime);
 
-	bool Collision(sf::RectangleShape entity, string move_type);
+	bool Collision(Entity& entity, string move_type);
 
 	sf::View getView() { return m_view; };
 	sf::Texture getTexture() { return PlayerTexture; };
@@ -21,4 +21,10 @@ private:
 	sf::Texture PlayerTexture;
 	sf::Sprite PlayerSprite;
 	Animations m_anim;
+
+	float m_scaleWidth;
+	float m_scaleHeight;
+	unsigned int m_row;
+	bool m_canJump;
+	float m_speed;
 };

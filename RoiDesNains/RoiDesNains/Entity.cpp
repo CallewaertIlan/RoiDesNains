@@ -1,50 +1,29 @@
 #include "Framework.h"
 
 Entity::Entity() {
-
+	m_type = 0;
 }
 
 Entity::~Entity() {
 
 }
 
-void Entity::initialisation(float width, float height, int type) {
+void Entity::initialisation(float width, float height, float x, float y, int type, sf::Texture* texture) {
+	m_type = type;
 	sf::Vector2f size(width, height);
-	m_width = width;
-	m_height = height;
-	// Taille du recftangle pour l'entity
+	sf::Vector2f pos(x, y);
+
+	// Taille du rectangle pour l'entity
 	m_rect.setSize(size);
 
+	// Positions du rectangle
+	m_rect.setPosition(pos);
+
 	// Texture du rectangle pour l'entity
-	setTexture();
+	m_rect.setTexture(texture);
 
 }
 
 void Entity::OnUpdate() {
-
-}
-
-void Entity::setTexture() {
-
-	sf::Texture rock;
-	rock.loadFromFile("../Images/rock.png");
-	sf::Texture pic;
-	pic.loadFromFile("../Images/pic.png");
-	sf::Texture door;
-	door.loadFromFile("../Images/door.png");
-
-	switch (m_type)
-	{
-	case Entity::ROCK:
-		m_texture = rock;
-		m_rect.setTexture(&rock);
-		break;
-	case Entity::PIC:
-		break;
-	case Entity::PLATFORM:
-		break;
-	case Entity::DOOR:
-		break;
-	}
 
 }
