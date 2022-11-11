@@ -20,7 +20,6 @@ using namespace std;
 #include <cmath>
 #include "Animations.h"
 #include "Entity.h"
-#include "Map.h"
 #include "Player.h"
 #include "Menu.h"
 #include "Game.h"
