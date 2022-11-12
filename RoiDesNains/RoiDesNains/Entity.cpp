@@ -30,4 +30,8 @@ void Entity::OnUpdate(float deltaTime) {
 		m_rect.move(cos(timeGetTime()/500.0f), 0);
 	}
 
+	if (m_type == Entity::KEY) {
+		// Ajouter la couleur foncer ou supprimer la clef lors d'une collision
+	}
+
 }

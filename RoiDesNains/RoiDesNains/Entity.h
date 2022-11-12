@@ -6,12 +6,14 @@ public:
 	{
 		ROCK = 0,
 		PIC,
-		PLATFORM,
 		DOOR,
+		KEY,
 
 	};
 	Entity();
 	~Entity();
+
+	int GetType() { return m_type; };
 
 	void initialisation(float width, float height, float x, float y, int type, sf::Texture* texture);
 	void OnUpdate(float deltaTime);
@@ -19,6 +21,7 @@ public:
 
 private:
 	sf::RectangleShape m_rect;
+	sf::Color m_color;
 	int m_type;
 };
 

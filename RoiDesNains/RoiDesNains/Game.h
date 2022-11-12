@@ -29,7 +29,7 @@ protected:
 	sf::Texture rockTexture;
 	sf::Texture doorTexture;
 	sf::Texture picTexture;
-	bool isPaused;
+	sf::Texture keyTexture;
 	int m_gameState;
 	vector<Entity> m_listEntities;
 	sf::RenderWindow m_window;

@@ -1,11 +1,21 @@
 #include "Framework.h"
 
-Player::Player(){
+Player::Player()
+{
+}
+
+Player::~Player()
+{
+}
+
+void Player::initialisation(float x, float y) {
 	m_speed = 200.0f;
 	m_row = 0;
 	m_scaleWidth = 2.5f;
 	m_scaleHeight = 2.5f;
+
 	m_hp = 3;
+	m_keys = 0;
 
 	// Variables pour le saut
 	m_timeNow = 0.0f;
@@ -17,16 +27,12 @@ Player::Player(){
 	PlayerTexture.setSmooth(FALSE);
 	PlayerSprite.setTexture(PlayerTexture);
 	PlayerSprite.setScale(m_scaleWidth, m_scaleHeight);
-	PlayerSprite.setPosition(180, 400);
+	PlayerSprite.setPosition(x, y);
 	m_view.setSize(900.0f, 506.25f);
 
 	PlayerSprite.setOrigin(11, 20);
 
 	m_anim.initiaisation(&PlayerTexture, sf::Vector2u(5, 2), 0.3f);
-}
-
-Player::~Player()
-{
 }
 
 void Player::OnEnter(int oldState)
@@ -90,9 +96,13 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 	bool collide = false;
 	for (int i = 0; i < listEntities.size(); i++)
 	{
+		if (Collision(listEntities[i], "all") == true && listEntities[i].GetType() == Entity::KEY) {
+			m_keys = 1;
+			listEntities[i].setColor(sf::Color::Color(sf::Uint8(80), sf::Uint8(80), sf::Uint8(80)));
+		}
 		if (Collision(listEntities[i], "down") == true) {
-			//if (false) {000
-				collide = true;
+			//if (false) {
+			collide = true;
 
 			//}
 		}
@@ -129,6 +139,8 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 bool Player::Collision(Entity& entity, string move_type)
 {
 	if (move_type == "down")
+		return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
+	if (move_type == "all")
 		return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
 	//else if (move_type == "right")
 	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());

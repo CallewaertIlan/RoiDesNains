@@ -13,7 +13,6 @@ Game::~Game()
 
 void Game::Init() {
     m_window.create(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
-	m_player = new Player;
 	Loop();
 }
 
@@ -61,6 +60,7 @@ void Game::LoadRessources()
     rockTexture.loadFromFile("../Images/rock.png");
     doorTexture.loadFromFile("../Images/door.png");
     picTexture.loadFromFile("../Images/pic.png");
+    keyTexture.loadFromFile("../Images/key.png");
     
     m_listEntities.clear();
     ifstream inFile;
@@ -83,10 +83,20 @@ void Game::LoadRessources()
                 Entity pic;
                 pic.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::PIC, &picTexture);
                 m_listEntities.push_back(pic);
-            }else if (tp[i] == '3') {
+            }
+            else if (tp[i] == 'D') {
                 Entity door;
                 door.initialisation(32.0f, 54.0f, i * 32.0f, (count - 2) * 18.0f, Entity::DOOR, &doorTexture);
                 m_listEntities.push_back(door);
+            }
+            else if (tp[i] == 'K') {
+                Entity key;
+                key.initialisation(18.0f, 33.0f, i * 32.0f, count * 18.0f, Entity::KEY, &keyTexture);
+                m_listEntities.push_back(key);
+            }
+            else if (tp[i] == 'P') {
+                m_player = new Player;
+                m_player->initialisation(i * 32.0f, count * 18.0f);
             }
         }
         count++;
@@ -182,4 +192,17 @@ void Game::DisplayHUD() {
         spriteHeart.setPosition(50 + 50 * i, 50);
         m_window.draw(spriteHeart);
     }
+
+    // Afficher le nombre de clef
+    sf::Texture key;
+    key.loadFromFile("../Images/key.png");
+
+    sf::Sprite keySprite(key);
+    keySprite.setPosition(WINSIZE_X - 50, 50);
+    
+    if (m_player->getKeys() < 1) {
+        keySprite.setColor(sf::Color::Color(sf::Uint8(80), sf::Uint8(80), sf::Uint8(80)));
+    }
+
+    m_window.draw(keySprite);
 }
