@@ -12,6 +12,7 @@ Game::~Game()
 }
 
 void Game::Init() {
+    m_font.loadFromFile("../Font/arial.ttf");
     m_window.create(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
 	Loop();
 }
@@ -200,9 +201,27 @@ void Game::DisplayHUD() {
     sf::Sprite keySprite(key);
     keySprite.setPosition(WINSIZE_X - 50, 50);
     
-    if (m_player->getKeys() < 1) {
-        keySprite.setColor(sf::Color::Color(sf::Uint8(80), sf::Uint8(80), sf::Uint8(80)));
+    if (m_player->getKeys() >= 1) {
+        m_window.draw(keySprite);
     }
 
-    m_window.draw(keySprite);
+    // Afficher ce que le player dit
+
+    if (m_player->getListDisplay().size() > 0) {
+        if (!m_isSpeaking) {
+            m_timeLastDisplay = timeGetTime();
+            m_isSpeaking = true;
+        }
+        sf::Text text;
+        text.setFont(m_font);
+        text.setString(m_player->getListDisplay()[0]);
+        text.setCharacterSize(50);
+        text.setFillColor(sf::Color::White);
+        text.setPosition(200, 50);
+        m_window.draw(text);
+        if (m_timeLastDisplay + 2000.0f < timeGetTime()) {
+            m_player->refreshListDisplay();
+            m_isSpeaking = false;
+        }
+    }
 }

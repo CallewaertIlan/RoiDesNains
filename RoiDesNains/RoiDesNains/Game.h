@@ -30,8 +30,15 @@ protected:
 	sf::Texture doorTexture;
 	sf::Texture picTexture;
 	sf::Texture keyTexture;
+
+	sf::Font m_font;
+
 	int m_gameState;
 	vector<Entity> m_listEntities;
 	sf::RenderWindow m_window;
 	Player* m_player;
+
+	// Discours du Player
+	float m_timeLastDisplay;
+	bool m_isSpeaking;
 };

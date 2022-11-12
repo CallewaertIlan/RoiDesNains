@@ -27,9 +27,6 @@
     <ClCompile Include="Menu.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
-    <ClCompile Include="App.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="Animations.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
@@ -45,9 +42,6 @@
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Fichiers d%27en-tête</Filter>
-    </ClInclude>
-    <ClInclude Include="App.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
     <ClInclude Include="Animations.h">
@@ -77,6 +71,15 @@
       <Filter>Fichiers de ressources</Filter>
     </Image>
     <Image Include="..\Images\door.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\key.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\heart.png">
+      <Filter>Fichiers de ressources</Filter>
+    </Image>
+    <Image Include="..\Images\bgDeath.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
   </ItemGroup>

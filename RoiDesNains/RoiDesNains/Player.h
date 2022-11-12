@@ -14,9 +14,11 @@ public:
 
 	bool Collision(Entity& entity, string move_type);
 	void addHp(int hp);
+	void refreshListDisplay();
 
 	int getLife() { return m_hp; };
 	int getKeys() { return m_keys; };
+	vector<string> getListDisplay() { return m_listDisplay; };
 
 	sf::View getView() { return m_view; };
 	sf::Texture getTexture() { return PlayerTexture; };
@@ -27,6 +29,8 @@ private:
 	sf::Texture PlayerTexture;
 	sf::Sprite PlayerSprite;
 	Animations m_anim;
+
+	vector<string> m_listDisplay;
 
 	float m_scaleWidth;
 	float m_scaleHeight;
@@ -40,6 +44,8 @@ private:
 	
 	float m_timeNow;
 	float m_timeStartJump;
+
+	float m_timeAddDisplay;
 
 	float m_speed;
 };

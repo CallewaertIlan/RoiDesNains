@@ -2,6 +2,20 @@
 
 Player::Player()
 {
+	m_speed = 0.0f;
+	m_row = 0;
+	m_scaleWidth = 0.0f;
+	m_scaleHeight = 0.0f;
+
+	m_hp = 0;
+	m_keys = 0;
+
+	// Variables pour le saut
+	m_timeNow = 0.0f;
+	m_timeStartJump = 0.0f;
+	m_canJump = false;
+	m_isJump = false;
+	m_timeAddDisplay = 0.0f;
 }
 
 Player::~Player()
@@ -55,7 +69,8 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 	// test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
 		addHp(-1);
-		
+	// test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
 	// Aller à droite
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		PlayerSprite.setScale(m_scaleWidth, m_scaleHeight);
@@ -98,8 +113,19 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 	{
 		if (Collision(listEntities[i], "all") == true && listEntities[i].GetType() == Entity::KEY) {
 			m_keys = 1;
-			listEntities[i].setColor(sf::Color::Color(sf::Uint8(80), sf::Uint8(80), sf::Uint8(80)));
+			m_listDisplay.push_back("You take the key !");
 		}
+		
+		if (Collision(listEntities[i], "all") == true && listEntities[i].GetType() == Entity::DOOR)
+			if (m_keys > 0 && m_timeAddDisplay + 2000.0f <= timeGetTime()) {
+				m_timeAddDisplay = timeGetTime();
+				m_listDisplay.push_back("You open the door !");
+			}
+			else if (m_timeAddDisplay + 2000.0f <= timeGetTime()) {
+				m_timeAddDisplay = timeGetTime();
+				m_listDisplay.push_back("The door is lock... find the key !");
+			}
+
 		if (Collision(listEntities[i], "down") == true) {
 			//if (false) {
 			collide = true;
@@ -121,19 +147,6 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 	PlayerSprite.setTextureRect(m_anim.getUvRect());
 
 	PlayerSprite.move(movement);
-
-
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-	//	PlayerSprite.setScale(3.9f, 3.9f);
-	//	PlayerSprite.move(sf::Vector2f(2.2f, 0.0f));
-	//}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
-	//	PlayerSprite.setScale(-3.9f, 3.9f);
-	//	PlayerSprite.move(sf::Vector2f(-2.2f, 0.0f));
-	//}
-	//if (sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-	//	PlayerSprite.move(sf::Vector2f(0.0f, -5.0f));
-	//}
 }
 
 bool Player::Collision(Entity& entity, string move_type)
@@ -148,4 +161,19 @@ bool Player::Collision(Entity& entity, string move_type)
 
 void Player::addHp(int hp) {
 	m_hp += hp;
+}
+
+void Player::refreshListDisplay() {
+	vector<string> temporaryListDisplay;
+	for (int i = 0; i < m_listDisplay.size(); i++)
+	{
+		temporaryListDisplay.push_back(m_listDisplay[i]);
+	}
+	m_listDisplay.clear();
+
+	for (int i = 0; i < m_listDisplay.size(); i++)
+	{
+		if (i != 0)
+			m_listDisplay.push_back(temporaryListDisplay[i]);
+	}
 }
