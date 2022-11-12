@@ -126,6 +126,9 @@ void Game::OnRender(sf::Sprite bgGame) {
     // Dessiner le personnage
     m_window.draw(m_player->getSprite());
 
+    // Dessiner les coeurs
+    DisplayHUD();
+
     // Afficher les mises à jour de la fenetre
     m_window.display();
 }
@@ -143,6 +146,12 @@ void Game::Menu() {
         m_gameState = Game::GAME;
         bgTexture.~Texture();
     }
+
+    if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
+    {
+        m_gameState = Game::DEAD;
+        bgTexture.~Texture();
+    }
 }
 
 void Game::Death() {
@@ -156,5 +165,21 @@ void Game::Death() {
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
     {
         m_window.close();
+    }
+}
+
+void Game::DisplayHUD() {
+
+    m_window.setView(m_window.getDefaultView());
+
+    // Afficher les coeurs du personnage
+    sf::Texture heart;
+    heart.loadFromFile("../Images/heart.png");
+
+    for (int i = 0; i < m_player->getLife(); i++)
+    {
+        sf::Sprite spriteHeart(heart);
+        spriteHeart.setPosition(50 + 50 * i, 50);
+        m_window.draw(spriteHeart);
     }
 }

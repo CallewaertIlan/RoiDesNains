@@ -18,6 +18,7 @@ public:
 
 	void OnUpdate(float deltaTime);
 	void OnRender(sf::Sprite bgGame);
+	void DisplayHUD();
 	void Menu();
 	void Death();
 

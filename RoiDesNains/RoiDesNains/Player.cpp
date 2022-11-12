@@ -5,6 +5,7 @@ Player::Player(){
 	m_row = 0;
 	m_scaleWidth = 2.5f;
 	m_scaleHeight = 2.5f;
+	m_hp = 3;
 
 	// Variables pour le saut
 	m_timeNow = 0.0f;
@@ -45,6 +46,10 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
 
+	// test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
+		addHp(-1);
+		
 	// Aller à droite
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
 		PlayerSprite.setScale(m_scaleWidth, m_scaleHeight);
@@ -127,4 +132,8 @@ bool Player::Collision(Entity& entity, string move_type)
 		return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
 	//else if (move_type == "right")
 	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
+}
+
+void Player::addHp(int hp) {
+	m_hp += hp;
 }

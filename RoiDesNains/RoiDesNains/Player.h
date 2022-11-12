@@ -11,7 +11,9 @@ public:
 	virtual void OnUpdate(vector<Entity>& listEntities, int row, float deltaTime);
 
 	bool Collision(Entity& entity, string move_type);
+	void addHp(int hp);
 
+	int getLife() { return m_hp; };
 	sf::View getView() { return m_view; };
 	sf::Texture getTexture() { return PlayerTexture; };
 	sf::Sprite getSprite() { return PlayerSprite; };
@@ -28,6 +30,8 @@ private:
 
 	bool m_canJump;
 	bool m_isJump;
+
+	int m_hp;
 	
 	float m_timeNow;
 	float m_timeStartJump;
