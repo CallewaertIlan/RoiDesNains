@@ -13,16 +13,36 @@ Game::~Game()
 
 void Game::Init() {
     m_font.loadFromFile("../Font/arial.ttf");
+    rockTexture.loadFromFile("../Images/rock.png");
+    doorTexture.loadFromFile("../Images/door.png");
+    picTexture.loadFromFile("../Images/pic.png");
+
+    keyTexture.loadFromFile("../Images/key.png");
+    keySprite.setTexture(keyTexture);
+
+    bgMainTexture.loadFromFile("../Images/bg_game.png");
+    bgMainSprite.setTexture(bgMainTexture);
+    bgMainSprite.setScale(5.4f, 3.7f);
+
+    bgPauseTexture.loadFromFile("../Images/bgPause.png");
+    bgPauseSprite.setTexture(bgPauseTexture);
+
+    bgDeathTexture.loadFromFile("../Images/bgDeath.png");
+    bgDeathSprite.setTexture(bgDeathTexture);
+
+    heartTexture.loadFromFile("../Images/heart.png");
+
+    m_text.setFont(m_font);
+    m_text.setCharacterSize(50);
+    m_text.setFillColor(sf::Color::White);
+    m_text.setPosition(500, 50);
+
     m_window.create(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
 	Loop();
 }
 
 void Game::Loop()
 {
-    sf::Texture bg;
-    bg.loadFromFile("../Images/bg_game.png");
-    sf::Sprite bgGame(bg);
-    bgGame.setScale(5.4f, 3.7f);
 
     float deltaTime = 0.0f;
     sf::Clock clock;
@@ -44,7 +64,7 @@ void Game::Loop()
         {
         case Game::GAME:
             OnUpdate(deltaTime);
-            OnRender(bgGame);
+            OnRender();
             break;
         case Game::MENU:
             Menu();
@@ -57,12 +77,7 @@ void Game::Loop()
 }
 
 void Game::LoadRessources()
-{
-    rockTexture.loadFromFile("../Images/rock.png");
-    doorTexture.loadFromFile("../Images/door.png");
-    picTexture.loadFromFile("../Images/pic.png");
-    keyTexture.loadFromFile("../Images/key.png");
-    
+{    
     m_listEntities.clear();
     ifstream inFile;
     inFile.open("../Level/Test1.txt", ios::in);
@@ -121,12 +136,12 @@ void Game::OnUpdate(float deltaTime) {
     m_player->OnUpdate(m_listEntities, 0, deltaTime);
 }
 
-void Game::OnRender(sf::Sprite bgGame) {
+void Game::OnRender() {
     // Effacer tout sur la fenetre
     m_window.clear();
 
     // Dessiner le fond
-    m_window.draw(bgGame);
+    m_window.draw(bgMainSprite);
 
     // Entity
     for (int i = 0; i < m_listEntities.size(); i++)
@@ -145,32 +160,24 @@ void Game::OnRender(sf::Sprite bgGame) {
 }
 
 void Game::Menu() {
-    sf::Texture bgTexture;
-    bgTexture.loadFromFile("../Images/bgPause.png");
-    sf::Sprite bgPause(bgTexture);
     m_window.setView(m_window.getDefaultView());
-    m_window.draw(bgPause);
+    m_window.draw(bgPauseSprite);
     m_window.display();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
     {
         m_gameState = Game::GAME;
-        bgTexture.~Texture();
     }
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Delete))
     {
         m_gameState = Game::DEAD;
-        bgTexture.~Texture();
     }
 }
 
 void Game::Death() {
-    sf::Texture bgTexture;
-    bgTexture.loadFromFile("../Images/bgDeath.png");
-    sf::Sprite bgPause(bgTexture);
     m_window.setView(m_window.getDefaultView());
-    m_window.draw(bgPause);
+    m_window.draw(bgDeathSprite);
     m_window.display();
 
     if (sf::Keyboard::isKeyPressed(sf::Keyboard::Enter))
@@ -184,21 +191,15 @@ void Game::DisplayHUD() {
     m_window.setView(m_window.getDefaultView());
 
     // Afficher les coeurs du personnage
-    sf::Texture heart;
-    heart.loadFromFile("../Images/heart.png");
 
     for (int i = 0; i < m_player->getLife(); i++)
     {
-        sf::Sprite spriteHeart(heart);
+        sf::Sprite spriteHeart(heartTexture);
         spriteHeart.setPosition(50 + 50 * i, 50);
         m_window.draw(spriteHeart);
     }
 
     // Afficher le nombre de clef
-    sf::Texture key;
-    key.loadFromFile("../Images/key.png");
-
-    sf::Sprite keySprite(key);
     keySprite.setPosition(WINSIZE_X - 50, 50);
     
     if (m_player->getKeys() >= 1) {
@@ -212,13 +213,8 @@ void Game::DisplayHUD() {
             m_timeLastDisplay = timeGetTime();
             m_isSpeaking = true;
         }
-        sf::Text text;
-        text.setFont(m_font);
-        text.setString(m_player->getListDisplay()[0]);
-        text.setCharacterSize(50);
-        text.setFillColor(sf::Color::White);
-        text.setPosition(200, 50);
-        m_window.draw(text);
+        m_text.setString(m_player->getListDisplay()[0]);
+        m_window.draw(m_text);
         if (m_timeLastDisplay + 2000.0f < timeGetTime()) {
             m_player->refreshListDisplay();
             m_isSpeaking = false;

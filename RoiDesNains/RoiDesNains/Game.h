@@ -17,7 +17,7 @@ public:
 	void LoadRessources();
 
 	void OnUpdate(float deltaTime);
-	void OnRender(sf::Sprite bgGame);
+	void OnRender();
 	void DisplayHUD();
 	void Menu();
 	void Death();
@@ -29,9 +29,23 @@ protected:
 	sf::Texture rockTexture;
 	sf::Texture doorTexture;
 	sf::Texture picTexture;
+
 	sf::Texture keyTexture;
+	sf::Sprite keySprite;
+
+	sf::Texture bgMainTexture;
+	sf::Sprite bgMainSprite;
+	
+	sf::Texture bgPauseTexture;
+	sf::Sprite bgPauseSprite;
+
+	sf::Texture bgDeathTexture;
+	sf::Sprite bgDeathSprite;
+
+	sf::Texture heartTexture;
 
 	sf::Font m_font;
+	sf::Text m_text;
 
 	int m_gameState;
 	vector<Entity> m_listEntities;
