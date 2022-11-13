@@ -6,9 +6,12 @@ int main()
 	_CrtMemState memStateInit;
 	_CrtMemCheckpoint(&memStateInit);
 #endif
-
-	Menu menu = Menu();
-	menu.OnUpdate();
+	bool isOpen = true;
+	while (isOpen)
+	{
+		Menu menu = Menu();
+		isOpen = menu.OnUpdate();
+	}
 
 #ifdef _DEBUG
 	_CrtMemState memStateEnd, memStateDiff;

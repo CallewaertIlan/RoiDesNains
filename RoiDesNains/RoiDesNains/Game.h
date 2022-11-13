@@ -8,6 +8,7 @@ public:
 		GAME = 0,
 		MENU,
 		DEAD,
+		WIN,
 	};
 	Game();
 	~Game();
@@ -46,6 +47,8 @@ protected:
 
 	sf::Font m_font;
 	sf::Text m_text;
+
+	vector<string> m_listMaps;
 
 	int m_gameState;
 	vector<Entity> m_listEntities;

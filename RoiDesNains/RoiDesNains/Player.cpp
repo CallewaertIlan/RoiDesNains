@@ -23,6 +23,8 @@ Player::~Player()
 }
 
 void Player::initialisation(float x, float y) {
+	m_originalPos.x = x;
+	m_originalPos.y = y;
 	m_speed = 200.0f;
 	m_row = 0;
 	m_scaleWidth = 2.5f;
@@ -41,7 +43,7 @@ void Player::initialisation(float x, float y) {
 	PlayerTexture.setSmooth(FALSE);
 	PlayerSprite.setTexture(PlayerTexture);
 	PlayerSprite.setScale(m_scaleWidth, m_scaleHeight);
-	PlayerSprite.setPosition(x, y);
+	PlayerSprite.setPosition(m_originalPos.x, m_originalPos.y);
 	m_view.setSize(900.0f, 506.25f);
 
 	PlayerSprite.setOrigin(11, 20);
@@ -62,27 +64,25 @@ void Player::OnExit(int newState)
 {
 }
 
-void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
+bool Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 {
 	sf::Vector2f movement(0.0f, 0.0f);
 
-	// test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::I))
-		addHp(-1);
-	// test !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-
 	// Aller à droite
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Right) || sf::Keyboard::isKeyPressed(sf::Keyboard::D))
+	{
 		PlayerSprite.setScale(m_scaleWidth, m_scaleHeight);
 		movement.x += m_speed * deltaTime;
 	}
 	// Aller à gauche
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Left) || sf::Keyboard::isKeyPressed(sf::Keyboard::Q))
+	{
 		PlayerSprite.setScale(-m_scaleWidth, m_scaleHeight);
 		movement.x -= m_speed * deltaTime;
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Up) || sf::Keyboard::isKeyPressed(sf::Keyboard::Space))
+	{
 		m_timeNow = timeGetTime();
 		if (m_isJump == false && m_canJump == true) {
 			m_timeStartJump = timeGetTime();
@@ -95,49 +95,86 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 			m_isJump = false;
 		}
 	}
-	else {
+	else
+	{
 		m_isJump = false;
 	}
 
 	// Ligne pour l'animation
-	if (movement.x == 0.0f) {
+	if (movement.x == 0.0f)
+	{
 		m_row = 0;
 	}
-	else {
+	else
+	{
 		m_row = 1;
 
 	}
 
-	bool collide = false;
+	bool collideFloor = false;
+	bool collideCeil = false;
+	bool collideLeft = false;
+	bool collideRight = false;
+
 	for (int i = 0; i < listEntities.size(); i++)
 	{
-		if (Collision(listEntities[i], "all") == true && listEntities[i].GetType() == Entity::KEY) {
+		if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::KEY)
+		{
 			m_keys = 1;
-			m_listDisplay.push_back("You take the key !");
+			m_listDisplay.push_back("You took the key !");
 		}
-		
-		if (Collision(listEntities[i], "all") == true && listEntities[i].GetType() == Entity::DOOR)
-			if (m_keys > 0 && m_timeAddDisplay + 2000.0f <= timeGetTime()) {
-				m_timeAddDisplay = timeGetTime();
-				m_listDisplay.push_back("You open the door !");
-			}
-			else if (m_timeAddDisplay + 2000.0f <= timeGetTime()) {
-				m_timeAddDisplay = timeGetTime();
-				m_listDisplay.push_back("The door is lock... find the key !");
-			}
 
-		if (Collision(listEntities[i], "down") == true) {
-			//if (false) {
-			collide = true;
-
-			//}
+		if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::DOOR)
+		{
+			if (m_keys > 0 && m_timeAddDisplay + 2000.0f <= timeGetTime())
+			{
+				m_timeAddDisplay = timeGetTime();
+				m_listDisplay.push_back("You opened the door !");
+				return true;
+			}
+			else if (m_timeAddDisplay + 2000.0f <= timeGetTime())
+			{
+				m_timeAddDisplay = timeGetTime();
+				m_listDisplay.push_back("The door is locked... find the key !");
+			}
+		}
+		if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::FLOOR)
+		{
+			collideFloor = true;
+		}
+		else if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::CEILING)
+		{
+			movement.y = 0.0f;
+			m_isJump = false;
+		}
+		else if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::WALL_LEFT)
+		{
+			if (movement.x < 0.0f)
+			{
+				movement.x = 0.0f;
+			}
+		}
+		else if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::WALL_RIGHT)
+		{
+			if (movement.x > 0.0f)
+			{
+				movement.x = 0.0f;
+			}
+		}
+		else if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::PIC)
+		{
+			PlayerSprite.setPosition(m_originalPos.x, m_originalPos.y);
+			m_hp -= 1;
+			m_keys -= 1;
 		}
 	}
 
-	if (collide) {
+	if (collideFloor)
+	{
 		m_canJump = true;
 	}
-	else {
+	else
+	{
 		movement.y += m_speed * deltaTime;
 		m_canJump = false;
 	}
@@ -147,20 +184,13 @@ void Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 	PlayerSprite.setTextureRect(m_anim.getUvRect());
 
 	PlayerSprite.move(movement);
+
+	return false;
 }
 
-bool Player::Collision(Entity& entity, string move_type)
+bool Player::Collision(Entity& entity)
 {
-	if (move_type == "down")
-		return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
-	if (move_type == "all")
-		return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
-	//else if (move_type == "right")
-	//	return getSprite().getGlobalBounds().intersects(entity.getGlobalBounds());
-}
-
-void Player::addHp(int hp) {
-	m_hp += hp;
+	return getSprite().getGlobalBounds().intersects(entity.GetRect().getGlobalBounds());
 }
 
 void Player::refreshListDisplay() {

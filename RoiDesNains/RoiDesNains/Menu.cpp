@@ -25,7 +25,7 @@ void Menu::OnExit(int newState)
 {
 }
 
-void Menu::OnUpdate()
+bool Menu::OnUpdate()
 {
     sf::RenderWindow window(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
     sf::Texture bg;
@@ -68,12 +68,11 @@ void Menu::OnUpdate()
                 newGame();
                 break;
             case 2:
-                window.close();
                 keysInfo();
                 break;
             case 3:
                 window.close();
-                return;
+                return false;
                 break;
             default:
                 break;
@@ -84,7 +83,10 @@ void Menu::OnUpdate()
         while (window.pollEvent(event))
         {
             if (event.type == sf::Event::Closed)
+            {
                 window.close();
+                return false;
+            }
         }
         window.clear();
         window.draw(bgtest);

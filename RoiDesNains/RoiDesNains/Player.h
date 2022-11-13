@@ -8,11 +8,11 @@ public:
 	virtual void OnEnter(int oldState);
 	virtual void OnExecute();
 	virtual void OnExit(int newState);
-	virtual void OnUpdate(vector<Entity>& listEntities, int row, float deltaTime);
+	bool OnUpdate(vector<Entity>& listEntities, int row, float deltaTime);
 
 	void initialisation(float x, float y);
 
-	bool Collision(Entity& entity, string move_type);
+	bool Collision(Entity& entity);
 	void addHp(int hp);
 	void refreshListDisplay();
 
@@ -48,4 +48,6 @@ private:
 	float m_timeAddDisplay;
 
 	float m_speed;
+
+	sf::Vector2f m_originalPos;
 };

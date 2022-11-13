@@ -84,7 +84,10 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Level\Test1.txt">
+    <Text Include="..\Level\Map1.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="..\Level\Map2.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
   </ItemGroup>

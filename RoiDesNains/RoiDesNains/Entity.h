@@ -4,8 +4,11 @@ class Entity
 public:
 	enum type
 	{
-		ROCK = 0,
+		FLOOR = 0,
 		PIC,
+		WALL_LEFT,
+		WALL_RIGHT,
+		CEILING,
 		DOOR,
 		KEY,
 

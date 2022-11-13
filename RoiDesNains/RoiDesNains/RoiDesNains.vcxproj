@@ -161,7 +161,8 @@
     <Image Include="..\Images\rock.png" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="..\Level\Test1.txt" />
+    <Text Include="..\Level\Map1.txt" />
+    <Text Include="..\Level\Map2.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -37,6 +37,9 @@ void Game::Init() {
     m_text.setFillColor(sf::Color::White);
     m_text.setPosition(500, 50);
 
+    m_listMaps.push_back("Map1.txt");
+    m_listMaps.push_back("Map2.txt");
+
     m_window.create(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
 	Loop();
 }
@@ -72,6 +75,9 @@ void Game::Loop()
         case Game::DEAD:
             Death();
             break;
+        case Game::WIN:
+            m_window.close();
+            break;
         }
     }
 }
@@ -80,44 +86,78 @@ void Game::LoadRessources()
 {    
     m_listEntities.clear();
     ifstream inFile;
-    inFile.open("../Level/Test1.txt", ios::in);
-    if (!inFile) {
-        cout << "Unable to open file";
-        return;
-    }
-    int count = 0;
-    string tp;
-    while (getline(inFile, tp)) {
-        for (int i = 0; i < tp.size(); i++)
-        {
-            if (tp[i] == '1') {
-                Entity rock;
-                rock.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::ROCK, &rockTexture);
-                m_listEntities.push_back(rock);
-            }
-            else if (tp[i] == '2') {
-                Entity pic;
-                pic.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::PIC, &picTexture);
-                m_listEntities.push_back(pic);
-            }
-            else if (tp[i] == 'D') {
-                Entity door;
-                door.initialisation(32.0f, 54.0f, i * 32.0f, (count - 2) * 18.0f, Entity::DOOR, &doorTexture);
-                m_listEntities.push_back(door);
-            }
-            else if (tp[i] == 'K') {
-                Entity key;
-                key.initialisation(18.0f, 33.0f, i * 32.0f, count * 18.0f, Entity::KEY, &keyTexture);
-                m_listEntities.push_back(key);
-            }
-            else if (tp[i] == 'P') {
-                m_player = new Player;
-                m_player->initialisation(i * 32.0f, count * 18.0f);
-            }
+    int random = rand() % m_listMaps.size();
+    bool verfiListEmpty = true;
+    for (int i = 0; i < m_listMaps.size(); i++)
+    {
+        if (m_listMaps[i] != "") {
+            verfiListEmpty = false;
         }
-        count++;
     }
-    inFile.close();
+    if (!verfiListEmpty) {
+        while (m_listMaps[random] == "")
+        {
+            random = rand() % m_listMaps.size();
+        }
+        inFile.open("../Level/" + m_listMaps[random], ios::in);
+        m_listMaps[random] = "";
+
+        if (!inFile) {
+            cout << "Unable to open file";
+            return;
+        }
+        int count = 0;
+        string tp;
+        while (getline(inFile, tp)) {
+            for (int i = 0; i < tp.size(); i++)
+            {
+                if (tp[i] == '1') {
+                    Entity rock;
+                    rock.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::FLOOR, &rockTexture);
+                    m_listEntities.push_back(rock);
+                }
+                else if (tp[i] == '2') {
+                    Entity pic;
+                    pic.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::PIC, &picTexture);
+                    m_listEntities.push_back(pic);
+                }
+                else if (tp[i] == '3') {
+                    Entity rock;
+                    rock.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::WALL_LEFT, &rockTexture);
+                    m_listEntities.push_back(rock);
+                }
+                else if (tp[i] == '4') {
+                    Entity rock;
+                    rock.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::CEILING, &rockTexture);
+                    m_listEntities.push_back(rock);
+                }
+                else if (tp[i] == '5') {
+                    Entity rock;
+                    rock.initialisation(32.0f, 18.0f, i * 32.0f, count * 18.0f, Entity::WALL_RIGHT, &rockTexture);
+                    m_listEntities.push_back(rock);
+                }
+                else if (tp[i] == 'D') {
+                    Entity door;
+                    door.initialisation(32.0f, 54.0f, i * 32.0f, (count - 2) * 18.0f, Entity::DOOR, &doorTexture);
+                    m_listEntities.push_back(door);
+                }
+                else if (tp[i] == 'K') {
+                    Entity key;
+                    key.initialisation(18.0f, 33.0f, i * 32.0f, count * 18.0f, Entity::KEY, &keyTexture);
+                    m_listEntities.push_back(key);
+                }
+                else if (tp[i] == 'P') {
+                    m_player = new Player;
+                    m_player->initialisation(i * 32.0f, count * 18.0f);
+                }
+            }
+            count++;
+        }
+        inFile.close();
+    }
+    else {
+        m_gameState = Game::WIN;
+    }
 }
 
 void Game::OnUpdate(float deltaTime) { 
@@ -133,7 +173,14 @@ void Game::OnUpdate(float deltaTime) {
 
     // Player
     m_window.setView(m_player->getView());
-    m_player->OnUpdate(m_listEntities, 0, deltaTime);
+    bool doorIsOpen = m_player->OnUpdate(m_listEntities, 0, deltaTime);
+    if (doorIsOpen) {
+        LoadRessources();
+    }
+    if (m_player->getLife() <= 0)
+    {
+        m_gameState = Game::DEAD;
+    }
 }
 
 void Game::OnRender() {

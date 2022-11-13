@@ -6,7 +6,7 @@ public:
 	~Menu();
 
 	virtual void OnEnter(int oldState);
-	virtual void OnUpdate();
+	bool OnUpdate();
 	virtual void OnExecute();
 	virtual void OnExit(int newState);
 
