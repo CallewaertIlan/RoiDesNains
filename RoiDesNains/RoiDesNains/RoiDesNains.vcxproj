@@ -152,7 +152,7 @@
   <ItemGroup>
     <Image Include="..\Images\bgDeath.png" />
     <Image Include="..\Images\bggame.png" />
-    <Image Include="..\Images\bgtest.png" />
+    <Image Include="..\Images\bgmenu.png" />
     <Image Include="..\Images\door.png" />
     <Image Include="..\Images\heart.png" />
     <Image Include="..\Images\key.png" />
@@ -163,6 +163,7 @@
   <ItemGroup>
     <Text Include="..\Level\Map1.txt" />
     <Text Include="..\Level\Map2.txt" />
+    <Text Include="..\Level\Map3.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

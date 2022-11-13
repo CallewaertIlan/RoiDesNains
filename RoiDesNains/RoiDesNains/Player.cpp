@@ -138,7 +138,7 @@ bool Player::OnUpdate(vector<Entity>& listEntities, int row, float deltaTime)
 				m_listDisplay.push_back("The door is locked... find the key !");
 			}
 		}
-		if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::FLOOR)
+		if (Collision(listEntities[i]) && listEntities[i].GetType() == Entity::FLOOR && listEntities[i].GetRect().getPosition().y + 5.0f >= PlayerSprite.getPosition().y)
 		{
 			collideFloor = true;
 		}

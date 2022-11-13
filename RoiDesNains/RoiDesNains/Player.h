@@ -1,5 +1,5 @@
 #pragma once
-class Player : public sf::Transformable
+class Player
 {
 public:
 	Player();

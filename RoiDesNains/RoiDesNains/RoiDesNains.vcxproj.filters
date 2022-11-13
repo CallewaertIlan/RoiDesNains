@@ -52,7 +52,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\Images\bgtest.png">
+    <Image Include="..\Images\bgmenu.png">
       <Filter>Fichiers de ressources</Filter>
     </Image>
     <ClInclude Include="Menu.h">
@@ -88,6 +88,9 @@
       <Filter>Fichiers de ressources</Filter>
     </Text>
     <Text Include="..\Level\Map2.txt">
+      <Filter>Fichiers de ressources</Filter>
+    </Text>
+    <Text Include="..\Level\Map3.txt">
       <Filter>Fichiers de ressources</Filter>
     </Text>
   </ItemGroup>

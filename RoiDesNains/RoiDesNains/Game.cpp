@@ -39,6 +39,7 @@ void Game::Init() {
 
     m_listMaps.push_back("Map1.txt");
     m_listMaps.push_back("Map2.txt");
+    m_listMaps.push_back("Map3.txt");
 
     m_window.create(sf::VideoMode(WINSIZE_X, WINSIZE_Y), "RoiDesNains");
 	Loop();
